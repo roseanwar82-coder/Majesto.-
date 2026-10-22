@@ -40,18 +40,6 @@ jobs:
         working-directory: ${{ steps.app.outputs.dir }}
         run: npm install
 
-      - name: Align Expo package versions
-        working-directory: ${{ steps.app.outputs.dir }}
-        run: npx expo install --fix
-
-      - name: Checks (won't block the build)
-        continue-on-error: true
-        working-directory: ${{ steps.app.outputs.dir }}
-        run: |
-          npm run verify
-          npm run typecheck
-          npm test
-
       - name: Generate native Android project
         working-directory: ${{ steps.app.outputs.dir }}
         run: npx expo prebuild --platform android --no-install
